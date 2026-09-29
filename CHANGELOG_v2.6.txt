@@ -1,0 +1,12 @@
+Junba AI Transcriber v2.6
+
+1. 新增硬體加速選單：Auto / NVIDIA CUDA / Intel GPU OpenVINO / Intel NPU OpenVINO / CPU。
+2. 新增 Intel NPU (AI Boost) OpenVINO GenAI Whisper provider。
+3. 新增 Intel Arc / Intel iGPU OpenVINO Whisper provider。
+4. 新增 Intel / AMD CPU 通用 faster-whisper INT8 路徑。
+5. 自動硬體選擇順序：CUDA → Intel GPU → Intel NPU → CPU。
+6. OpenVINO 模型第一次使用自動下載官方 INT8 模型，之後可離線重用。
+7. 環境檢查新增 OpenVINO Runtime / GenAI / GPU / NPU / CPU 資訊。
+8. GitHub Actions 增加 OpenVINO import / available_devices / 硬體選項測試。
+9. 保留 v2.5 立即停止並輸出中止版檔案邏輯。
+10. AMD Radeon GPU 尚未納入本版 GPU 加速；AMD CPU 可正常使用 CPU 模式。

@@ -1,0 +1,42 @@
+Junba AI Transcriber v2.6 — 驗證報告
+日期：2026-09-30
+
+本次更新目標
+- Intel NPU / Intel AI Boost：OpenVINO GenAI Whisper
+- Intel Arc / Intel iGPU：OpenVINO GenAI Whisper
+- NVIDIA GPU：faster-whisper / CTranslate2 CUDA
+- Intel / AMD CPU：faster-whisper / CTranslate2 INT8
+- 保留 Gemini、切割/合併、繁體中文、多講者、立即停止並輸出目前結果
+
+目前環境已完成
+1. Python compileall：PASS
+2. pytest：12 passed
+3. FFmpeg 音檔長度/合併：PASS
+4. 中文檔名切割與切割快取重用：PASS
+5. Gemini 中文檔名 ASCII 安全上傳別名：PASS
+6. Gemini 多人講者 + 字詞時間戳 request shape：PASS
+7. 台灣繁體中文轉換：PASS
+8. 立即停止部分 DOCX/TXT/SRT/VTT 可重新開啟：PASS
+9. OpenVINO 音訊前處理：M4A → 16kHz mono float32：PASS
+10. 硬體路由：CUDA → Intel GPU → Intel NPU → CPU：PASS
+11. AMD CPU fallback：PASS
+12. OpenVINO 官方模型 mapping：large-v3/medium/small/base：PASS
+
+GitHub Actions Windows build 還會驗證
+- PySide6 / faster-whisper / OpenVINO / openvino_genai imports
+- openvino.Core().available_devices
+- Source GUI offscreen UI self-test
+- Single EXE build + --self-test + --ui-self-test
+- Portable build + --self-test + --ui-self-test
+
+無法在目前 Linux 工作環境假裝驗證的項目
+- 真實 Intel AI Boost NPU 推論
+- 真實 Intel Arc GPU 推論
+- 真實 NVIDIA CUDA 推論
+這些必須在實際 Windows 硬體上由 v2.6 的「重新偵測硬體」與環境檢查確認。
+
+重要說明
+- Intel NPU/GPU 第一次使用會下載 OpenVINO INT8 Whisper 模型並進行裝置編譯。
+- 模型下載後可留在本機重用。
+- 16 GB RAM 且當下記憶體占用偏高時，large-v3 首次編譯可能較吃記憶體；可先關閉大型程式或改 medium/small。
+- AMD Radeon GPU 本版未加入 GPU 加速；AMD CPU 可使用 CPU INT8。
